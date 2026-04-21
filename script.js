@@ -14,11 +14,13 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
 
 const tl = gsap.timeline({ delay: 0.3 });
 
-const nameEl = document.getElementById('heroName');
-const nameText = nameEl.textContent;
-nameEl.innerHTML = nameText.split('').map(c =>
-  `<span class="char">${c}</span>`
-).join('');
+  const nameEl = document.getElementById('heroName');
+  const nameText = nameEl.textContent.trim();
+  
+  nameEl.innerHTML = nameText.split(' ').map(word => {
+    const chars = word.split('').map(c => `<span class="char">${c}</span>`).join('');
+    return `<span style="display:inline-block; white-space:nowrap;">${chars}</span>`;
+  }).join(' ');
 
 tl.to('#navbar', { y: 0, duration: 0.8, ease: 'power3.out' })
   .to('#heroEyebrow', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
